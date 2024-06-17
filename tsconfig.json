@@ -1,0 +1,16 @@
+{
+	"compilerOptions": {
+		"module": "NodeNext",
+		"moduleResolution": "NodeNext",
+		"target": "ES2020",
+		"sourceMap": true,
+		"outDir": "dist",
+		"rootDir": "src",
+		"baseUrl": "src",
+		"paths": {
+			"@/*": ["*"]
+		}
+	},
+	"include": ["src/**/*.ts", "src/**/*.json", ".env"],
+	"exclude": ["node_modules", "src/logs"]
+}
