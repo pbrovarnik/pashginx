@@ -17,7 +17,6 @@ class IndexRoute implements Routes {
 					200: {
 						description: 'Successful response',
 						type: 'string',
-						example: 'ok',
 					},
 				},
 			},

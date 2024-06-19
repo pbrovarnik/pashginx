@@ -2,7 +2,7 @@ import { FastifyReply, FastifyRequest } from 'fastify';
 
 class IndexController {
 	public static index = (_: FastifyRequest, reply: FastifyReply): void => {
-		reply.send('ok');
+		reply.send('Service is up!');
 	};
 }
 

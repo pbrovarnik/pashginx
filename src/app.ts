@@ -15,15 +15,15 @@ const server = Fastify({
 	logger: true,
 });
 
-server.register(fastifyEnv, { dotenv: true, schema });
 server.register(fastifyCors, {
 	origin: ORIGIN,
-	methods: ['GET', 'POST'],
+	methods: ['DELETE', 'GET', 'POST'],
 	credentials: true,
 });
+
+server.register(fastifyEnv, { dotenv: true, schema });
 server.register(fastifyHelmet);
 server.register(fastifyCompress);
-
 server.register(initializeRoutes, { prefix: `api/${API_VERSION}` });
 
 server.setErrorHandler((error: FastifyError, request, reply) => {
