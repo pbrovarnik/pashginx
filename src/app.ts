@@ -5,42 +5,41 @@ import fastifyCompress from '@fastify/compress';
 import fastifyEnv from '@fastify/env';
 
 import { schema } from '@utils/validate-env';
-import { API_VERSION, PORT } from '@config/index';
+import { API_VERSION, ORIGIN, PORT } from '@config/index';
 import { initializeRoutes } from '@plugins/initializeRoutes';
 
 const port = PORT ? parseInt(PORT) : 3000;
 const host = 'RENDER' in process.env ? '0.0.0.0' : 'localhost';
-const urls = ['example1.com', 'exam.com'];
 
-const fastify = Fastify({
+const server = Fastify({
 	logger: true,
 });
 
-fastify.register(fastifyEnv, { dotenv: true, schema });
-fastify.register(fastifyCors, {
-	origin: urls,
+server.register(fastifyEnv, { dotenv: true, schema });
+server.register(fastifyCors, {
+	origin: ORIGIN,
 	methods: ['GET', 'POST'],
 	credentials: true,
 });
-fastify.register(fastifyHelmet);
-fastify.register(fastifyCompress);
+server.register(fastifyHelmet);
+server.register(fastifyCompress);
 
-fastify.register(initializeRoutes, { prefix: `api/${API_VERSION}` });
+server.register(initializeRoutes, { prefix: `api/${API_VERSION}` });
 
-fastify.setErrorHandler((error: FastifyError, request, reply) => {
+server.setErrorHandler((error: FastifyError, request, reply) => {
 	const status: number = error.statusCode ?? 500;
 	const message: string = status === 500 ? 'Something went wrong' : error.message ?? 'Something went wrong';
 
-	fastify.log.error(`[${request.method}] ${request.url} >> StatusCode:: ${status}, Message:: ${message}`);
+	server.log.error(`[${request.method}] ${request.url} >> StatusCode:: ${status}, Message:: ${message}`);
 
 	return reply.status(status).send({ error: true, message });
 });
 
 export const startServer = async () => {
 	try {
-		await fastify.listen({ host, port });
+		await server.listen({ host, port });
 	} catch (err) {
-		fastify.log.error(err);
+		server.log.error(err);
 		process.exit(1);
 	}
 };

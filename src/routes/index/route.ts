@@ -8,8 +8,8 @@ class IndexRoute implements Routes {
 
 	public indexController = new Controller();
 
-	public initializeRoutes(fastify: FastifyInstance, _: RouteOptions, done: () => void) {
-		fastify.route({
+	public initializeRoutes(server: FastifyInstance, _: RouteOptions, done: () => void) {
+		server.route({
 			method: 'GET',
 			url: this.path,
 			schema: {
