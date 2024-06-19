@@ -1,18 +1,21 @@
 {
 	"compilerOptions": {
-		"module": "NodeNext",
-		"moduleResolution": "NodeNext",
-		"target": "ES2020",
+		"module": "commonjs",
+		"target": "ES6",
 		"sourceMap": true,
-		"allowImportingTsExtensions": true,
-		"noEmit": true,
-		"outDir": "dist",
-		"rootDir": "src",
-		"baseUrl": "src",
+		"strict": true,
+		"esModuleInterop": true,
+		"skipLibCheck": true,
+		"rootDir": "./src",
+		"outDir": "./build",
+		"baseUrl": ".",
 		"paths": {
-			"@config": ["config"],
-			"@interfaces": ["interfaces"],
-			"@plugins": ["plugins"]
+			"@root/*": ["*"],
+			"@config/*": ["src/config/*"],
+			"@interfaces/*": ["src/interfaces/*"],
+			"@plugins/*": ["src/plugins/*"],
+			"@routes/*": ["src/routes/*"],
+			"@utils/*": ["src/utils/*"]
 		}
 	},
 	"include": ["src/**/*.ts", "src/**/*.json", ".env"],

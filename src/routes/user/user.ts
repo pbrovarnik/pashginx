@@ -1,6 +1,6 @@
 import { FastifyInstance, FastifyReply, RouteOptions } from 'fastify';
 
-export async function userRoutes(fastify: FastifyInstance, opts: RouteOptions, done: () => void) {
+export async function userRoutes(fastify: FastifyInstance, _: RouteOptions, done: () => void) {
 	fastify.route({
 		method: 'GET',
 		url: '/user',

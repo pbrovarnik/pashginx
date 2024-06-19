@@ -1,14 +1,14 @@
 import { FastifyInstance, RouteOptions } from 'fastify';
 
-import Controller from './controller.ts';
-import { Routes } from 'interfaces/route.ts';
+import Controller from './controller';
+import { Routes } from '@interfaces/route';
 
 class IndexRoute implements Routes {
 	public path = '/';
 
 	public indexController = new Controller();
 
-	public initializeRoutes(fastify: FastifyInstance, opts: RouteOptions, done: () => void) {
+	public initializeRoutes(fastify: FastifyInstance, _: RouteOptions, done: () => void) {
 		fastify.route({
 			method: 'GET',
 			url: this.path,

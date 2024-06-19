@@ -3,19 +3,19 @@
 	"version": "1.0.0",
 	"description": "",
 	"main": "src/server.ts",
-	"type": "module",
 	"scripts": {
-		"build": "tsc",
 		"dev": "tsx watch ./src/server.ts",
-		"start": "node ./dist/server.js"
+		"start": "node ./build/server.js",
+		"build": "tsc && tsc-alias"
 	},
 	"keywords": [],
 	"author": "",
 	"license": "ISC",
 	"devDependencies": {
-		"@types/node": "^20.14.2",
-		"tsx": "^4.15.6",
-		"typescript": "^5.4.5"
+		"@types/node": "~20",
+		"tsc-alias": "^1.8.10",
+		"tsx": "~4",
+		"typescript": "~5"
 	},
 	"dependencies": {
 		"@fastify/compress": "^7.0.3",

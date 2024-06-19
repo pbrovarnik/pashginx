@@ -4,12 +4,12 @@ import fastifyCors from '@fastify/cors';
 import fastifyCompress from '@fastify/compress';
 import fastifyEnv from '@fastify/env';
 
-import { schema } from './utils/validate-env.ts';
-import { initializeRoutes } from 'plugins/initializeRouts.ts';
-import { API_VERSION } from 'config/index.ts';
+import { schema } from '@utils/validate-env';
+import { API_VERSION, PORT } from '@config/index';
+import { initializeRoutes } from '@plugins/initializeRoutes';
 
-const port = parseInt(process.env.PORT) || 3000;
-const host = 'RENDER' in process.env ? `0.0.0.0` : `localhost`;
+const port = PORT ? parseInt(PORT) : 3000;
+const host = 'RENDER' in process.env ? '0.0.0.0' : 'localhost';
 const urls = ['example1.com', 'exam.com'];
 
 const fastify = Fastify({
