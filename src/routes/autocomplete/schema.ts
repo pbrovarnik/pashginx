@@ -18,7 +18,7 @@ export const AcSuggestSchema: FastifySchema = {
 			type: 'object',
 			properties: {
 				...responseProperty,
-				data: { type: 'array', items: { type: 'string' } },
+				suggestions: { type: 'array', items: { type: 'string' } },
 			},
 		},
 		400: ERROR400,

@@ -16,7 +16,7 @@ class AutocompleteController {
 		const { q } = req.query;
 
 		return {
-			data: this.acService.getSuggestion(q),
+			suggestions: this.acService.getSuggestion(q),
 		};
 	};
 
