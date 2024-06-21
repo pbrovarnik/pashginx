@@ -1,4 +1,4 @@
-import { FastifyReply, FastifyRequest } from 'fastify';
+import { FastifyRequest } from 'fastify';
 import { AutocompleteBody, AutocompleteQuery } from './interface';
 import AutocompleteService from './service';
 

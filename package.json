@@ -25,6 +25,7 @@
 		"@fastify/type-provider-typebox": "^4.0.0",
 		"@sinclair/typebox": "^0.32.33",
 		"dotenv": "^16.4.5",
-		"fastify": "^4.28.0"
+		"fastify": "^4.28.0",
+		"stripe": "^15.12.0"
 	}
 }
