@@ -3,10 +3,18 @@ import fastifyHelmet from '@fastify/helmet';
 import fastifyCors from '@fastify/cors';
 import fastifyCompress from '@fastify/compress';
 import fastifyEnv from '@fastify/env';
+import { Server } from 'socket.io';
 
 import { schema } from '@utils/validate-env';
 import { API_VERSION, ORIGIN, PORT } from '@config/index';
-import { initializeRoutes } from '@plugins/initializeRoutes';
+import { initializeRoutes } from '@plugins/initialize-routes';
+import fastifySocketIO from '@plugins/fastity-socket-io';
+
+declare module 'fastify' {
+	interface FastifyInstance {
+		io: Server;
+	}
+}
 
 const port = PORT ? parseInt(PORT) : 3000;
 const host = 'RENDER' in process.env ? '0.0.0.0' : 'localhost';
@@ -24,6 +32,7 @@ server.register(fastifyCors, {
 server.register(fastifyEnv, { dotenv: true, schema });
 server.register(fastifyHelmet);
 server.register(fastifyCompress);
+server.register(fastifySocketIO);
 server.register(initializeRoutes, { prefix: `api/${API_VERSION}` });
 
 server.setErrorHandler((error: FastifyError, request, reply) => {
