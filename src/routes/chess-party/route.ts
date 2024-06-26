@@ -35,9 +35,10 @@ class ChessPartyRoute implements Routes {
 			this.cpController.onLeaveGame(socket);
 
 			// Video chat connections
-			this.cpController.onMakeCall(socket);
-			this.cpController.onAnswerCall(socket);
+			this.cpController.onOffer(socket);
+			this.cpController.onAnswerOffer(socket);
 			this.cpController.onCandidate(socket);
+			this.cpController.onAcceptCall(io, socket);
 			this.cpController.onCancelCall(socket);
 			this.cpController.onEndCall(socket);
 

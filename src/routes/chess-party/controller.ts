@@ -60,8 +60,9 @@ class ChessParyController {
 	};
 
 	// Broadcast event to room
-	private broadcastMessageToRoom = ({ socket, emitterEvent, signalData = {} }: { socket: SocketWithGameId; emitterEvent: any; signalData: any }) =>
+	private broadcastMessageToRoom = ({ socket, emitterEvent, signalData = {} }: { socket: SocketWithGameId; emitterEvent: any; signalData: any }) => {
 		socket.to(socket.gameId).emit(emitterEvent, signalData);
+	};
 
 	public sendUpdateGamesList = (socket: Socket) => {
 		socket.broadcast.emit('games', this.cpService.getSanitizedGames());
@@ -166,8 +167,7 @@ class ChessParyController {
 		});
 	};
 
-	// Connect to video chat
-	public onMakeCall = (socket: Socket) => {
+	public onOffer = (socket: Socket) => {
 		socket.on('offer', (signalData) => {
 			const socketWithGameId = socket as SocketWithGameId;
 
@@ -175,8 +175,7 @@ class ChessParyController {
 		});
 	};
 
-	// Answer call
-	public onAnswerCall = (socket: Socket) => {
+	public onAnswerOffer = (socket: Socket) => {
 		socket.on('answer', (signalData) => {
 			const socketWithGameId = socket as SocketWithGameId;
 
@@ -184,12 +183,20 @@ class ChessParyController {
 		});
 	};
 
-	// Call candidate
 	public onCandidate = (socket: Socket) => {
 		socket.on('candidate', (signalData) => {
 			const socketWithGameId = socket as SocketWithGameId;
 
 			this.broadcastMessageToRoom({ socket: socketWithGameId, emitterEvent: 'candidate', signalData });
+		});
+	};
+
+	// Cancel call thats being made
+	public onAcceptCall = (io: Namespace, socket: Socket) => {
+		socket.on('accept-call', () => {
+			const socketWithGameId = socket as SocketWithGameId;
+
+			io.to(socketWithGameId.gameId).emit('accept-call');
 		});
 	};
 
