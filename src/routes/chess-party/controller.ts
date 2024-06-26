@@ -209,7 +209,7 @@ class ChessParyController {
 		});
 	};
 
-	// End call
+	// On End call
 	public onEndCall = (socket: Socket) => {
 		socket.on('end-call', () => {
 			const socketWithGameId = socket as SocketWithGameId;
